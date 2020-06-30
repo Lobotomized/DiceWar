@@ -1,0 +1,58 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <div id="choices">
+
+    </div>
+</head>
+
+<body>
+</body>
+
+</html>
+
+
+<script type="text/babel">
+
+    let socket = io();
+    let choicesHTML = document.getElementById('choices');
+    console.log(choicesHTML)
+
+    socket.on('returnState', (state) => {
+        //Draw the game
+        console.log(state)
+        if(state.dicesToPick){
+            ReactDOM.render(
+                <div>{state.dicesToPick.map((dice, i) => {
+                    return <h1 key={i}>
+                            {dice.map((obj) => {
+                                return <span>{obj.value}</span>
+                            })}
+                        </h1>
+                })}</div>,
+            document.getElementById('choices')
+            );
+        }
+
+
+    }) // Return State
+
+
+
+
+
+
+</script>
